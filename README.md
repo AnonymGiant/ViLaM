@@ -15,6 +15,9 @@ Some code in this repo is copied/modified from [BLIP2](https://github.com/salesf
 
 ## Experiments
 
+
+### Accurate Visual Grounding in COCO datasets
+
 > Evaluation results on visual grounding (RefCOCO, RefCOCO+ and RefCOCOg). Red indicates the method with the best indicators, and blue with the second-best. Acc@0.5 is applied to evaluate the performance of different methods. Three main types of visual grounding methods are used for comparison, namely two-stage, one-stage and generalist model.
 > 
 |                                           |  RefCOCO  |         |         |  RefCOCO+  |         |         | RefCOCOg |        |
@@ -40,4 +43,29 @@ Some code in this repo is copied/modified from [BLIP2](https://github.com/salesf
 > Results of visual grounding in RefCOCO with the OPT6.7b as the large language model. (a)-(c) are from testA split containing only people, while (d)-(f) from testB consisting of only non-people. We display typical cases of referring expressions, especially with common indications of orientation, size, color, attachment and markings. The referring expressions of the object are presented in the text box with two coordinates, where R (red) denotes grounding truth and Y (yellow) symbolizes the prediction. The red and yellow bounding boxes are also depicted in the image, respectively
 
 ![exp](images/exp.jpg)
+
+
+### General Visual Grounding in Medical Foreign Object Detection
+
+> The zero-shot results of visual question answering for foreign objects detection in chest X-ray images. (a) Chest X-ray image without foreign objects. Our model accurately states that there are no visible external foreign objects and points out the possible abnormality. (b) Chest X-ray image with foreign objects. The presence of foreign objects is accurately detected by giving its coordinates. Particularly, the model can deduce that the foreign object is metal or plastic by asking to recognize the foreign object.
+
+![exp](images/foreign-objects.jpg)
+
+
+### Scalable Visual Grounding in Disease Localization on Chest X-ray Datasets
+
+> Comparison with other state-of-the-art methods of disease localization task with 20-shot setting on six disease labels from the chest X-ray datasets. Acc@0.5 is applied to evaluate the methods.
+
+| Datasets | TBX11K       |    RSNA   | ChestXray14 |              |           |              |
+|----------|--------------|:---------:|:-----------:|:------------:|:---------:|:------------:|
+| Diseases | Tuberculosis | Pneumonia | Atelectasis | Infiltration | Pneumonia | Pneumothorax |
+| VGTR     | 1.99         |    4.67   |     3.70    |     6.67     |    3.23   |       0      |
+| OFA      | 20.40        |   14.67   |     3.90    |     8.78     |   22.57   |     12.49    |
+| Ours     | 30.84        |   28.00   |    11.11    |     8.89     |   32.26   |     20.83    |
+
+
+> The 20-shot results of disease localization in chest X-ray images. The red box denotes the grounding truth, and the yellow box represents the prediction. (a) Tuberculosis detection in the TBX11K dataset. (b) Pneumonia detection in the RSNA dataset. 
+
+![exp](images/medical-detection.jpg)
+
 

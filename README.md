@@ -8,6 +8,8 @@ This repository is a PyTorch implementation of the vision-language model for vis
 
 ![model](images/model.jpg)
 
+Vision-language models have revolutionized human-computer interaction and shown significant progress in multi-modal tasks. However, applying these models to complex visual tasks like medical image analysis remains challenging. In this study, we propose ViLaM, a unified Vision-Language transformer model that integrates instruction tuning predicated on a large language model. This approach enables us to optimally utilize the knowledge and reasoning capacities of large pre-trained language models for an array of tasks encompassing both language and vision. We employ frozen pre-trained encoders to encode and align both image and text features, enabling ViLaM to handle a variety of visual tasks following textual instructions. Besides, we've designed cycle training for referring expressions to address the need for high-quality, paired referring expression datasets for training large models in terms of both quantity and quality. We evaluated ViLaM's exceptional performance on public general datasets and further confirmed its generalizability on medical datasets. Importantly, we've observed the model's impressive zero-shot learning ability, indicating the potential future application of ViLaM in the medical field.
+
 Some code in this repo is copied/modified from [BLIP2](https://github.com/salesforce/LAVIS).
 
 
@@ -16,7 +18,7 @@ Some code in this repo is copied/modified from [BLIP2](https://github.com/salesf
 ## Experiments
 
 
-### Accurate Visual Grounding in COCO datasets
+### Accurate Visual Grounding in COCO Datasets
 
 > Evaluation results on visual grounding (RefCOCO, RefCOCO+ and RefCOCOg). Red indicates the method with the best indicators, and blue with the second-best. Acc@0.5 is applied to evaluate the performance of different methods. Three main types of visual grounding methods are used for comparison, namely two-stage, one-stage and generalist model.
 > 

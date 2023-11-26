@@ -23,5 +23,5 @@ datasets:
           storage: coco/annotations/coco_vg_test.json
 
       images:
-        url: /mnt/data/coco/images/ 
+        url: /mnt/data/coco/images/
         storage: coco/images/

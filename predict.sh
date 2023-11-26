@@ -1,1 +1,1 @@
-python predict-multigpu.py
+python predict.py

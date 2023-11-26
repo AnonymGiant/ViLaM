@@ -10,12 +10,36 @@ This repository is a PyTorch implementation of the vision-language model for vis
 
 Vision-language models have revolutionized human-computer interaction and shown significant progress in multi-modal tasks. However, applying these models to complex visual tasks like medical image analysis remains challenging. In this study, we propose ViLaM, a unified Vision-Language transformer model that integrates instruction tuning predicated on a large language model. This approach enables us to optimally utilize the knowledge and reasoning capacities of large pre-trained language models for an array of tasks encompassing both language and vision. We employ frozen pre-trained encoders to encode and align both image and text features, enabling ViLaM to handle a variety of visual tasks following textual instructions. Besides, we've designed cycle training for referring expressions to address the need for high-quality, paired referring expression datasets for training large models in terms of both quantity and quality. We evaluated ViLaM's exceptional performance on public general datasets and further confirmed its generalizability on medical datasets. Importantly, we've observed the model's impressive zero-shot learning ability, indicating the potential future application of ViLaM in the medical field.
 
-Some code in this repo is copied/modified from [BLIP2](https://github.com/salesforce/LAVIS).
+The code in this repo is copied/modified from [BLIP2](https://github.com/salesforce/LAVIS).
 
 
+## Installation
+
+```bash
+pip install -r requirements.txt
+```
+
+Meanwhile, you need to follow blip2's guidelines to download the datasets and checkpoints of large language models as the pre-trained model. 
 
 
 ## Experiments
+
+Take vicuna7b as an example of training:
+
+```bash
+bash train-vicuna7b.sh
+```
+
+And, we provide test code for multiple GPUs:
+
+
+```bash
+bash predict.sh
+```
+
+
+
+## Results
 
 
 ### Accurate Visual Grounding in COCO Datasets

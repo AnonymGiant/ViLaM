@@ -60,6 +60,13 @@ bash predict.sh
 
 ### Case Studies of Robust Generalization in the Medical Domain
 
-> We conduct several case studies in the medical domain to corroborate the robust generalization of our model, namely medical foreign object detection and disease localization in chest X-rays. 
 
 
+> To further examine the generalization and scalability of our model, we conduct preliminary experiments of the referring bbox detection task on 12 typical datasets across 6 modalities in the medical domain. The proposed model is fine-tuned with 20-shot labels for each disease of non-radiology and radiology datasets, respectively. We conduct comparative experiments with VGTR and OFA(Large) as representatives of specialist and generalist models, respectively, to evaluate their performance and versatility in the referring bbox detection task.
+
+
+![exp](images/exp-medical.jpg)
+
+> Regarding medical foreign object detection, we employed the model trained on natural images directly, without fine-tuning specifically on chest X-rays. The Figure illustrates the results of visual question and answering for medical foreign object detection on the Object-CXR dataset. The necklace around the neck and the clip in the middle retain their inherent shape in X-rays, so our model accurately identifies the presence of these foreign objects outside the body, attributed to its robust and considerable generalization. Beyond the localization, our model can recognize the detected foreign object upon inquiry, and deduce that the object is likely made of metal or plastic debris. More specially, ViLaM also exhibits an ability to infer the potential origin or source of the debris, leveraging its extensive language understanding capacity. Moreover, on the quantitative of classify the presence or absence of foreign objects, ViLaM achieves an AUC of 93.1\%, demonstrating a substantial feasibility and robust generalization. 
+
+![exp](images/foreign-objects.jpg)

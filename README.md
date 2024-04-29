@@ -1,14 +1,14 @@
-# ViLaM: A Vision-Language Model with Enhanced Visual Grounding and Generalization Capability
+# Enhancing Visual Grounding and Generalization: A Multi-Task Cycle Training Approach for Vision-Language Models
 
-This repository is a PyTorch implementation of the vision-language model for visual grounding proposed in *ViLaM: A Vision-Language Model with Enhanced Visual Grounding and Generalization Capability* (submitted)
-
-
+This repository is a PyTorch implementation of the vision-language model for visual grounding proposed in *Enhancing Visual Grounding and Generalization: A Multi-Task Cycle Training Approach for Vision-Language Models* (submitted)
 
 
 
 ![model](images/model.jpg)
 
-Vision-language models have revolutionized human-computer interaction and shown significant progress in multi-modal tasks. However, applying these models to complex visual tasks like medical image analysis remains challenging. In this study, we propose ViLaM, a unified Vision-Language transformer model that integrates instruction tuning predicated on a large language model. This approach enables us to optimally utilize the knowledge and reasoning capacities of large pre-trained language models for an array of tasks encompassing both language and vision. We employ frozen pre-trained encoders to encode and align both image and text features, enabling ViLaM to handle a variety of visual tasks following textual instructions. Besides, we've designed cycle training for referring expressions to address the need for high-quality, paired referring expression datasets for training large models in terms of both quantity and quality. We evaluated ViLaM's exceptional performance on public general datasets and further confirmed its generalizability on medical datasets. Importantly, we've observed the model's impressive zero-shot learning ability, indicating the potential future application of ViLaM in the medical field.
+Visual grounding occupies a pivotal position in multi-modality vision-language models. However, current vision-language models concentrate on comprehending images, ignoring the human-computer interaction with multi-tasks instructions,  thereby imposing limitations on their versatility and depth of responses. In this study, we propose ViLaM, a large multi-modality model, that supports multi-tasks of visual grounding using the cycle training strategy, with abundant interaction instructions. The cycle training between referring expression generation (REG) and referring expression comprehension (REC) is introduced. It enhances the consistency between visual location and referring expressions, and addresses the need for high-quality, multi-tasks visual grounding datasets. Moreover, multi-tasks of visual grounding are promoted in our model, contributed by the cycle training strategy. The multi-tasks in REC encompass a range of granularities, from region-level to pixel-level, which include referring bbox detection, referring keypoints detection, and referring image segmentation. In REG, referring region classification determines the fine-grained category of the target, while referring region captioning generates a comprehensive description. Meanwhile, all tasks participate in the joint training, synergistically enhancing one another and collectively improving the overall performance of the model. Furthermore, leveraging the capabilities of large language models, ViLaM extends a wide range of instructions, thereby significantly enhancing its generalization and interaction potentials. It is particularly advantageous in domains beyond natural images, such as the medical field. Extensive public datasets corroborate the superior capabilities of our model in visual grounding with muti-tasks. Additionally, validating its robust generalization, ViLaM is validated under open-set and few-shot scenarios. Especially in the medical field, our model demonstrates cross-domain robust generalization capabilities. Furthermore, we contribute a visual grounding dataset, especially with multi-tasks. To support and encourage the community focused on visual grounding, we have made both the dataset and our code public: https://github.com/AnonymGiant/ViLaM.
+
+
 
 The code in this repo is copied/modified from [BLIP2](https://github.com/salesforce/LAVIS).
 
@@ -42,56 +42,24 @@ bash predict.sh
 ## Results
 
 
-### Accurate Visual Grounding in COCO Datasets
+### Accurate REC of Multi-Tasks
 
-> Evaluation results on visual grounding (RefCOCO, RefCOCO+ and RefCOCOg). Red indicates the method with the best indicators, and blue with the second-best. Acc@0.5 is applied to evaluate the performance of different methods. Three main types of visual grounding methods are used for comparison, namely two-stage, one-stage and generalist model.
-> 
-|                                           |  RefCOCO  |         |         |  RefCOCO+  |         |         | RefCOCOg |        |
-|-------------------------------------------|:---------:|:-------:|:-------:|:----------:|:-------:|:-------:|:--------:|:------:|
-| Models                                    |    val    |  testA  |  testB  |    val     |  testA  |  testB  |  val-u   | test-u |
-| VILLA                                     |   82.39   |  87.48  |  74.84  |   76.17    |  81.54  |  66.84  |  76.18   | 76.71  |
-| DGA                                       |   86.34   |  86.64  |  84.79  |   73.56    |  78.31  |  68.15  |  80.21   | 80.26  |
-| CM-Att-Erase                              |   87.47   |  88.12  |  86.32  |   73.74    |  77.58  |  68.85  |  80.23   | 80.37  |
-| NMTREE                                    |   85.65   |  85.63  |  85.08  |   72.84    |  75.74  |  67.62  |  78.57   | 78.21  |
-| TransVG                                   |   81.02   |  82.72  |  78.35  |   64.82    |  70.70  |  56.94  |  68.67   | 67.73  |
-| MDETR                                     |   86.75   |  89.58  |  81.41  |   79.52    |  84.09  |  70.62  |  81.64   | 80.89  |
-| SeqTR                                     |   83.72   |  86.51  |  81.24  |   71.45    |  76.26  |  64.88  |  74.86   | 74.21  |
-| VGTR                                      |   79.30   |  82.16  |  74.38  |   64.40    |  70.85  |  55.84  |  66.83   | 67.28  |
-| OFA                                       |   92.04   |  94.03  |  88.44  |   87.86    |  91.70  |  80.71  |  88.07   | 88.78  |
-| mPLUG-2                                   |   90.33   |  92.80  |  86.05  |     -      |    -    |    -    |  84.70   | 85.14  |
-| Shikra-13B                                |   87.83   |  91.11  |  81.81  |   82.89    |  87.79  |  74.41  |  82.64   | 83.16  |
-| COMM-7B                                   |   91.73   |  94.06  |  88.85  |   87.21    |  91.74  |  81.39  |  87.32   | 88.33  |
-| $\textbf{Ours}_{\textbf{(Flan-t5-xl)}}$   |   42.77   |  43.14  |  44.53  |   43.84    |  43.85  |  45.22  |  50.55   | 49.71  |
-| $\textbf{Ours}_{\textbf{(OPT6.7b)}}$      |   88.79   |  91.44  |  86.30  |   85.86    |  90.84  |  83.09  |  88.62   | 87.22  |
-| $\textbf{Ours}_{\textbf{(Vicuna-7b)}}$    |   92.99   |  95.90  |  90.39  |   90.96    |  94.78  |  86.93  |  90.05   | 89.51  |
+> Quantitatively, Table.4 presents a comparison of referring bbox detection results between our model and various types of visual grounding models, including specialized models and multi-tasks models. It clearly demonstrates that our method achieves SOTA performance across all test datasets. Notably, in the testB split of RefCOCO and RefCOCO+, our model outperforms other methods by a significant margin. This highlights the superiority of our approach in effectively handling the referring expression comprehension with bounding boxes, particularly for non-people objects.
 
 
-> Results of visual grounding in RefCOCO with the OPT6.7b as the large language model. (a)-(c) are from testA split containing only people, while (d)-(f) from testB consisting of only non-people. We display typical cases of referring expressions, especially with common indications of orientation, size, color, attachment and markings. The referring expressions of the object are presented in the text box with two coordinates, where R (red) denotes grounding truth and Y (yellow) symbolizes the prediction. The red and yellow bounding boxes are also depicted in the image, respectively
+![exp-RBD](images/RBD.jpg)
 
-![exp](images/exp.jpg)
+> For referring bbox detection, Fig.3 illustrates the superiority of our method. It accurately identifies the object and understands its description words, such as position, color, and text on the object. Significantly, our model demonstrates the ability to recognize objects that are overlapping and occluded. When overlapping targets of the same class are present, our model reveals remarkable capabilities in understanding, discriminating, and locating them. This further corroborates that the cycle training effectively enhances the consistency between visual location and referring expressions.
 
+![exp](images/example-RBD.jpg)
 
-### General Visual Grounding in Medical Foreign Object Detection
+> Besides, our model expands the competencies of visual grounding to pixel-level shown in Fig.4. Polygon is adopted to accurately delineate the objects denoted by referring expressions,  thereby significantly enhancing the alignment between the target shape and the referring expressions through the cycle training strategy.
 
-> The zero-shot results of visual question answering for foreign objects detection in chest X-ray images. (a) Chest X-ray image without foreign objects. Our model accurately states that there are no visible external foreign objects and points out the possible abnormality. (b) Chest X-ray image with foreign objects. The presence of foreign objects is accurately detected by giving its coordinates. Particularly, the model can deduce that the foreign object is metal or plastic by asking to recognize the foreign object.
-
-![exp](images/foreign-objects.jpg)
-
-
-### Scalable Visual Grounding in Disease Localization on Chest X-ray Datasets
-
-> Comparison with other state-of-the-art methods of disease localization task with 20-shot setting on six disease labels from the chest X-ray datasets. Acc@0.5 is applied to evaluate the methods.
-
-| Datasets | TBX11K       |    RSNA   | ChestXray14 |              |           |              |
-|----------|--------------|:---------:|:-----------:|:------------:|:---------:|:------------:|
-| Diseases | Tuberculosis | Pneumonia | Atelectasis | Infiltration | Pneumonia | Pneumothorax |
-| VGTR     | 1.99         |    4.67   |     3.70    |     6.67     |    3.23   |       0      |
-| OFA      | 20.40        |   14.67   |     3.90    |     8.78     |   22.57   |     12.49    |
-| Ours     | 30.84        |   28.00   |    11.11    |     8.89     |   32.26   |     20.83    |
+![exp](images/example-RIS.jpg)
 
 
-> The 20-shot results of disease localization in chest X-ray images. The red box denotes the grounding truth, and the yellow box represents the prediction. (a) Tuberculosis detection in the TBX11K dataset. (b) Pneumonia detection in the RSNA dataset. 
+### Case Studies of Robust Generalization in the Medical Domain
 
-![exp](images/medical-detection.jpg)
+> We conduct several case studies in the medical domain to corroborate the robust generalization of our model, namely medical foreign object detection and disease localization in chest X-rays. 
 
 
